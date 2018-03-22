@@ -22,9 +22,11 @@ namespace TeleTextWebApiServer.Controllers
         }
 
         // POST: api/TeleText
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody]string value)
         {
-
+            var response = Request.CreateResponse(HttpStatusCode.Created, value);
+            
+            return response;
         }
         
     }

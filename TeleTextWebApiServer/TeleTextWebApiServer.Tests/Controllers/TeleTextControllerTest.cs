@@ -4,6 +4,11 @@ using TeleTextWebApiServer;
 using TeleTextWebApiServer.Controllers;
 using System.Net.Http;
 using System.Web.Http;
+using System.Net;
+using System.Web.Http.Routing;
+using System.Web.Http.Controllers;
+using System.Web.Http.Hosting;
+
 
 namespace TeleTextWebApiServer.Tests.Controllers
 {
@@ -41,6 +46,28 @@ namespace TeleTextWebApiServer.Tests.Controllers
             // Assert the result  
             
             Assert.AreEqual("TeleText" + id, response);
+        }
+
+        [TestMethod]
+        public void PostTeleTextWithStringParam()
+        {
+            // Set up Prerequisites 
+            var sampleText = "SAMPLE TEXT";
+
+            var config = new HttpConfiguration();
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://localhost:58592/api/teletext");
+            var route = config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}");
+            var routeData = new HttpRouteData(route, new HttpRouteValueDictionary { { "controller", "TeleText" } });
+            var controller = new TeleTextController();
+            controller.ControllerContext = new HttpControllerContext(config, routeData, request);
+            controller.Request = request;
+            controller.Request.Properties[HttpPropertyKeys.HttpConfigurationKey] = config;
+
+            // Act
+            var result = controller.Post(sampleText);
+
+            // Assert
+            Assert.AreEqual(HttpStatusCode.Created, result.StatusCode);
         }
     }
 }
