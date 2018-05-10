@@ -1,0 +1,19 @@
+﻿@model TeleTextWebApiServer.Models.SuccessDTO
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Result from TeleText WEB API</h2>
+
+@if(Model.success != 1)
+    { 
+        <h1>ERROR IN WEB API. Please check</h1>
+    }
+<ol>
+    @foreach(var msg in Model.message)
+        {
+                <li>@msg</li>
+         }
+</ol>
+

@@ -17,7 +17,7 @@ namespace TeleTextWebApiClient.Controllers
 
             SuccessDTO messageResponse = getResponseFromTeleTextApi();
             
-            return View();
+            return View(messageResponse);
         }
 
         private SuccessDTO getResponseFromTeleTextApi()
