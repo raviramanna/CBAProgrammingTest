@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using TeleTextWebApiServer.Models;
+using TeleTextWebApiServer.Models.DTO;
 
 
 namespace TeleTextWebApiServer.Controllers
@@ -33,8 +33,9 @@ namespace TeleTextWebApiServer.Controllers
             int maxLengthOfLine = 25;
             try
             {
-                string[] a = new string[100];
-                int index = 0;
+                //string[] a = new string[100];
+                //int index = 0;
+                List<MessageEntity> messageList = new List<MessageEntity>();
 
                 for (int i = 0; i < sampleText.Length; i += maxLengthOfLine)
                 {
@@ -69,17 +70,14 @@ namespace TeleTextWebApiServer.Controllers
                             maxLengthOfLine = indexOfFullStop + 1;
                             line = sampleText.Substring(i, indexOfFullStop + 1).Trim();
                         }
-                        a[index++] = line;
+                        messageList.Add(new MessageEntity() { Success = true, MessageLine = line });
                     }
                     else
                     {
-                        a[index++] = (sampleText.Substring(i));
+                        messageList.Add(new MessageEntity() { Success = true, MessageLine = sampleText.Substring(i) });
                     }
                 }
-                var successDTO = new SuccessDTO();
-                successDTO.success = 1;
-                successDTO.message = a;
-                var message = Request.CreateResponse(HttpStatusCode.OK, successDTO);
+                var message = Request.CreateResponse(HttpStatusCode.OK, messageList);
                 return message;
             }
             catch (Exception ex)

@@ -1,4 +1,4 @@
-﻿@model TeleTextWebApiServer.Models.SuccessDTO
+﻿@model List<TeleTextWebApiClient.Models.APIDTOs.MessageEntity>
 
 @{
     ViewBag.Title = "Index";
@@ -6,14 +6,10 @@
 
 <h2>Result from TeleText WEB API</h2>
 
-@if(Model.success != 1)
-    { 
-        <h1>ERROR IN WEB API. Please check</h1>
-    }
 <ol>
-    @foreach(var msg in Model.message)
+    @foreach(var msg in Model)
         {
-                <li>@msg</li>
+                <li>@msg.MessageLine</li>
          }
 </ol>
 

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using TeleTextWebApiServer.Models;
+using TeleTextWebApiClient.Models.APIDTOs;
 
 namespace TeleTextWebApiClient.Controllers
 {
@@ -15,12 +15,12 @@ namespace TeleTextWebApiClient.Controllers
         public ActionResult Index()
         {
 
-            SuccessDTO messageResponse = getResponseFromTeleTextApi();
+            List<MessageEntity> messageResponse = getResponseFromTeleTextApi();
             
             return View(messageResponse);
         }
 
-        private SuccessDTO getResponseFromTeleTextApi()
+        private List<MessageEntity> getResponseFromTeleTextApi()
         {
             try
             {
@@ -40,7 +40,7 @@ namespace TeleTextWebApiClient.Controllers
                     var data = "=" + SAMPLE_TEXT;
                     var result1 = client.UploadString("http://localhost:58592/api/teletext", "POST", data);
 
-                    SuccessDTO messageResponse = JsonConvert.DeserializeObject<SuccessDTO>(result1);
+                    List<MessageEntity> messageResponse = JsonConvert.DeserializeObject<List<MessageEntity>>(result1);
                     return messageResponse;
                     //if (messageResponse.success == 1)
                     //{

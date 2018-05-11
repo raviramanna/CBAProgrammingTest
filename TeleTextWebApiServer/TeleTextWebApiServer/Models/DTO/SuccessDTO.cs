@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TeleTextWebApiClient.Models.APIDTOs
+namespace TeleTextWebApiServer.Models.DTO
 {
     public class MessageEntity
     {
