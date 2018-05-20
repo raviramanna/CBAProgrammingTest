@@ -11,6 +11,12 @@ namespace TeleTextWebApiServer.Controllers
 {
     public class TeleTextController : ApiController
     {
+        [HttpGet]
+        public string StartServer()
+        {
+            return "Teletext Server started successfully. Please start the client App";
+        }
+
         // GET: api/TeleText
         public IEnumerable<string> Get()
         {

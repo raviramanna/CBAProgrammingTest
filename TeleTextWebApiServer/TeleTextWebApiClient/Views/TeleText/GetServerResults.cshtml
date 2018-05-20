@@ -1,0 +1,15 @@
+﻿@model List<TeleTextWebApiClient.Models.APIDTOs.MessageEntity>
+
+@{
+    //ViewBag.Title = "GetServerResults";
+}
+
+<h1>GetServerResults</h1>
+<h2>Result from TeleText WEB API</h2>
+<ol>
+    @foreach (var msg in Model)
+    {
+        <li>@msg.MessageLine</li>
+    }
+</ol>
+
